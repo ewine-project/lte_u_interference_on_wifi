@@ -4,7 +4,7 @@ Impact of LTE-U on WiFi
 ## Experiment setup
 
 The set-up is shown here:
-![alt tag](system_model_lteu_detailed.png)
+![alt tag](system_model_lteu_detailed.png =250x)
 
 ## Traces:
 
