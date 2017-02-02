@@ -2,7 +2,7 @@
 """
 This example script reads recorded data.
 
-@author: Zubow, TU Berlin
+@author: Olbrich, Zubow (TU Berlin)
 """
 import re
 import json
