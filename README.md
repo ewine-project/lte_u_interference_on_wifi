@@ -15,6 +15,8 @@ assignment of radio channels to WiFi APs. Furthermore, information about the exa
 interference-aware packet scheduling, i.e. transmission during LTE-U OFF phases, and adaptive channel bonding, i.e. using
 secondary channel during LTE-U OFF phases only.
 
+The task is to achieve the aforementioned using information available at the MAC layer in a passive approach.
+
 ## Experiment setup
 
 Our system model is shown below. Here we have a WiFi BSS consisting of a single AP serving a single client station. 
@@ -56,11 +58,11 @@ iperf3.pklz
 
 - UDP downlink throughput measured at the WiFi AP
 - Note: the normalized UDP throughput of the WiFi link under LTE-U interference, relative to the non-interfered WiFi link, corresponds
-to the effective available medium airtime for the WiFi link.
+to the effective available medium airtime for the WiFi link. This is the ground truth to be predicted using MAC layer information at the WiFi AP side only (see below). 
 
 regmon.pklz
 
-- RegMon data collected at the WiFi AP; see [regmon](https://github.com/thuehn/RegMon) website for more information.
+- Information available at the MAC layer (at WiFi AP). The data was captured using the RegMon tool; see [regmon](https://github.com/thuehn/RegMon) website for more information.
 
 ## Scripts:
 
