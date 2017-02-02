@@ -1,13 +1,32 @@
 Impact of LTE-U on WiFi
 ============================
 
+Cellular network operators like Verizon are starting to offload data traffic in unlicensed 5 GHz ISM spectrum using
+LTE Unlicensed (LTE-U). However, this part of the radio spectrum is also used by IEEE 802.11 standards, e.g. 802.11a/ac/ax.
+Multiple studies have been carried out to identify the effects of LTE-U on WiFi. In particular, Jindal et al.
+showed, as LTE-U duty-cycling does not implement listen before talk mechanisms (LBT), it can under some conditions
+even disproportionately reduce WiFi throughput performance. Moreover, interference from LTE-U with moderate power can 
+be even more harmful to WiFi than high-power interference.
+
+To be able to cope with this impact and its effects, an approach that fist, enables Wi-Fi to detect the LTE-U
+interference and second, enables to quantify the effective available medium airtime of each link (downlink and uplink)
+during runtime, is needed. Afterwards, this knowledge enables to apply rapid interference management techniques such as
+assignment of radio channels to WiFi APs. Furthermore, information about the exact timings of the LTE-U ON and OFF phases allows to apply techniques like
+interference-aware packet scheduling, i.e. transmission during LTE-U OFF phases, and adaptive channel bonding, i.e. using
+secondary channel during LTE-U OFF phases only.
+
 ## Experiment setup
 
-The set-up is shown here:
+Our system model is shown below. Here we have a WiFi BSS consisting of a single AP serving a single client station. 
+In addition there is a co-located LTE-U BS operating in the DL using the same unlicensed radio spectrum as the WiFi
+BSS.
 
 ![system model](system_model_lteu_detailed.png)
 
 ## Traces:
+
+We analyzed the impact of LTE-U BS signal on WiFi communication for different configurations, i.e. LTE-U signal strengths 
+and duty-cycles. 
 
 Two measurement campaigns have been performed:
 
