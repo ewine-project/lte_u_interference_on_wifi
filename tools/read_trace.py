@@ -390,6 +390,44 @@ class Config():
             dat = json.load(fo)
         return dat
 
+    def get_meta_data_from_fname(self, fn):
+        #fn = fn.replace('/', '')
+        fn = fn.replace('--', '-~')
+
+        arr = fn.split('_')
+        meta_dict = {}
+        for item in arr:
+            subarr = item.split('=')
+
+            key = subarr[0]
+
+            if (len(subarr) > 2):
+                subarr[1] = "-".join(subarr[1:])
+                del subarr[2:]
+
+            if (len(subarr) == 2):
+                if '-' in subarr[1]:
+                    values = subarr[1].split('-')
+                else:
+                    values = [subarr[1], ]
+                values = [v.replace('~', '-') for v in values]
+                meta_dict[key] = values
+            else:
+                values = key.split('-')
+                key = 'lteu'
+                values = [v.replace('~', '-') for v in values]
+
+                if key in meta_dict:
+                    meta_dict[key].extend(values)
+                else:
+                    meta_dict[key] = values
+
+        #print(meta_dict)
+        #print('wifi: %s' % meta_dict['wifi'])
+        #print('lteu: %s' % meta_dict['lteu'])
+
+        return meta_dict
+
     def print(self, config_data):
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(config_data)
@@ -408,7 +446,9 @@ for x in os.walk(base_dir):
         fname = os.path.join(directory, 'config.json')
         cfg = Config()
         config_data = cfg.load_config(fname)
-        #cfg.print(config_data)
+        meta_data = cfg.get_meta_data_from_fname(config_data['common']['meas_name'])
+        cfg.print(config_data)
+        cfg.print(meta_data)
         #sampling_interval = config_data['regmon']['sampling_interval']
         #print('sampling_interval %f' % sampling_interval)
 
@@ -429,5 +469,5 @@ for x in os.walk(base_dir):
         iperf3_dat = iperf.decode_iperf3_data(iperf_rawdat)
         iperf.show_timing_info(iperf3_dat)
     except Exception as ex:
-        print('Failed to parse %s' % directory)
+        #print('Failed to parse %s' % directory)
         pass
