@@ -9,16 +9,6 @@ The set-up is shown here:
 
 ## Traces:
 
-The following data was collected during the experiment for different interfering LTE-U signal strengths and LTE-U duty-cycles:
-
-1. RegMon data collected at the WiFi AP:
-See [regmon](https://github.com/thuehn/RegMon) website for more information.
-
-2. iperf data (UDP DL throughput) collected at the WiFi AP.
-
-The normalized UDP throughput of the WiFi link under LTE-U interference, relative to the non-interfered WiFi link, corresponds
-to the effective available medium airtime for the WiFi link.
-
 Two measurement campaigns have been performed:
 
 wiplus_dl_lte-fb_20161223
@@ -31,7 +21,7 @@ wiplus_dl_lte-vb-rnd9_2016122
 with variable buffer trafﬁc model, i.e. the LTE-U ON phase was loaded uniform random between 30 % and 100 % which
 corresponds to an effective LTE-U duty cycle of 16%.
 
-The measurements of each parameter settings is contained in a folder. 
+The measurements of each parameter settings, i.e. different interfering LTE-U signal strengths and duty-cycles, is contained in a folder. 
 
 Each folder contains the following four files:
 
@@ -46,11 +36,12 @@ iometer.pklz
 iperf3.pklz
 
 - UDP downlink throughput measured at the WiFi AP
+- Note: the normalized UDP throughput of the WiFi link under LTE-U interference, relative to the non-interfered WiFi link, corresponds
+to the effective available medium airtime for the WiFi link.
 
 regmon.pklz
 
-- RegMon data collected at the WiFi AP
-
+- RegMon data collected at the WiFi AP; see [regmon](https://github.com/thuehn/RegMon) website for more information.
 
 ## Scripts:
 
