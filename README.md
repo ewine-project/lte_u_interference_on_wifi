@@ -3,7 +3,7 @@ Impact of LTE-U on WiFi
 
 ## Experiment setup
 
-The set-up is shown here:
+The setup is shown here:
 
 ![system model](system_model_lteu_detailed.png)
 
@@ -13,11 +13,11 @@ Two measurement campaigns have been performed:
 
 wiplus_dl_lte-fb_20161223
 
--- LTE with backlogged trafﬁc ,i.e. a full buffer trafficc model is used.
+- LTE with backlogged trafﬁc ,i.e. a full buffer traffic model is used.
 
 wiplus_dl_lte-vb-rnd9_2016122
 
--- Variable LTE-U traffic: The setup is as in previous experiment with a ﬁxed duty cycle of 33% but
+- Variable LTE-U traffic: The setup is as in previous experiment with a ﬁxed duty cycle of 33% but
 with variable buffer trafﬁc model, i.e. the LTE-U ON phase was loaded uniform random between 30 % and 100 % which
 corresponds to an effective LTE-U duty cycle of 16%.
 
