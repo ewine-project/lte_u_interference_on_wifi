@@ -132,3 +132,7 @@ The WiFi configuration was 802.11a, channel 48 (5240MHz), Tx power of 15 dBm, SI
 A simple energy-based detector is provided:
 
 	tools/ed_detector.py
+
+## Contact:
+
+TBD.
