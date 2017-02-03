@@ -466,10 +466,14 @@ for x in os.walk(base_dir):
         cfg.print(meta_data)
 
         lte_u_dc = None
+        lte_u_tx_pwr = None
         for item in meta_data['lteu']:
             if item.startswith('duty'):
                 re_match = re.search(r'[^a-z][\d]',item)
                 lte_u_dc = float(re_match.group()) / 100.0
+            if item.endswith('dbm'):
+                re_match = re.search(r'[\d]*',item).group()
+                lte_u_tx_pwr = re_match.group()
 
         print('Configured LTE-U duty cycle: %f' % lte_u_dc)
 
@@ -500,7 +504,7 @@ for x in os.walk(base_dir):
         est_airtime = ed_detector.estimate_eff_available_airtime_wifi(regmon_dat)
 
         print('*****')
-        print('Real vs. est. airtime: %f | %f' % (real_airtime, est_airtime))
+        print('LTE-U tx pwr %d, Real vs. est. airtime: %f | %f' % (lte_u_tx_pwr, real_airtime, est_airtime))
         print('*****')
 
     except Exception as ex:
