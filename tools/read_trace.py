@@ -16,7 +16,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 ### Iperf3 data ###
-from tools.ed_detector import EdDetector
+from ed_detector import EdDetector
 
 
 class Iperf3():
