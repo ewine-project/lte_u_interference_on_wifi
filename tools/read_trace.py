@@ -472,8 +472,7 @@ for x in os.walk(base_dir):
                 re_match = re.search(r'[^a-z][\d]',item)
                 lte_u_dc = float(re_match.group()) / 100.0
             if item.endswith('dbm'):
-                re_match = re.search(r'[\d]*',item).group()
-                lte_u_tx_pwr = re_match.group()
+                lte_u_tx_pwr = int(re.search(r'-?[\d]*',item).group())
 
         print('Configured LTE-U duty cycle: %f' % lte_u_dc)
 
@@ -508,5 +507,5 @@ for x in os.walk(base_dir):
         print('*****')
 
     except Exception as ex:
-        print('Failed to parse %s' % directory)
+        print('Failed to parse %s, %s' % (directory, str(ex)))
         pass
