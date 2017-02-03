@@ -16,6 +16,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 ### Iperf3 data ###
+from tools.ed_detector import EdDetector
+
+
 class Iperf3():
     def __init__(self):
         pass
@@ -79,6 +82,17 @@ class Iperf3():
         print('Mean RX throughput: %.2f Mbps' % iperf3_estats['rx_thrpt']['avg'])
         print('Mean TX throughput: %.2f Mbps' % iperf3_estats['tx_thrpt']['avg'])
         print('')
+
+    def get_normalized_tx_thr(self, iperf3_dat, max_tx_throughput):
+
+        iperf3_estats = {'tx_thrpt': {}, 'rx_thrpt': {}}
+        iperf3_estats['tx_thrpt']['avg'] = np.nanmean(iperf3_dat['tx_thrpt'])
+        iperf3_estats['rx_thrpt']['avg'] = np.nanmean(iperf3_dat['rx_thrpt'])
+
+        normalized_tx_thr = iperf3_estats['tx_thrpt']['avg'] / (1.0 * max_tx_throughput)
+
+        print('Normalized TX throughput: %f' % normalized_tx_thr)
+        return normalized_tx_thr
 
 ### RegMon data: https://github.com/thuehn/RegMon ###
 class RegMon():
@@ -434,6 +448,7 @@ class Config():
 
 # base folder
 base_dir = '../traces/wiplus_dl_lte-fb_20161223/'
+#base_dir = '../traces/strong/'
 
 for x in os.walk(base_dir):
     # strep through each measurement
@@ -449,6 +464,15 @@ for x in os.walk(base_dir):
         meta_data = cfg.get_meta_data_from_fname(config_data['common']['meas_name'])
         cfg.print(config_data)
         cfg.print(meta_data)
+
+        lte_u_dc = None
+        for item in meta_data['lteu']:
+            if item.startswith('duty'):
+                re_match = re.search(r'[^a-z][\d]',item)
+                lte_u_dc = float(re_match.group()) / 100.0
+
+        print('Configured LTE-U duty cycle: %f' % lte_u_dc)
+
         #sampling_interval = config_data['regmon']['sampling_interval']
         #print('sampling_interval %f' % sampling_interval)
 
@@ -468,6 +492,17 @@ for x in os.walk(base_dir):
         iperf_rawdat = iperf.load_data(fname)
         iperf3_dat = iperf.decode_iperf3_data(iperf_rawdat)
         iperf.show_timing_info(iperf3_dat)
+        norm_tx_thr = iperf.get_normalized_tx_thr(iperf3_dat, 29.0)
+        real_airtime = norm_tx_thr
+
+        # Simple ED detector
+        ed_detector = EdDetector()
+        est_airtime = ed_detector.estimate_eff_available_airtime_wifi(regmon_dat)
+
+        print('*****')
+        print('Real vs. est. airtime: %f | %f' % (real_airtime, est_airtime))
+        print('*****')
+
     except Exception as ex:
-        #print('Failed to parse %s' % directory)
+        print('Failed to parse %s' % directory)
         pass

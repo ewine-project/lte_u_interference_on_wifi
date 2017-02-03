@@ -126,3 +126,7 @@ Whereas the second a Python dictionary:
 Here IPerf was using UDP with bitrate of 90M in downlink.
 The LTE-U configuration was 64QAM, duty cycle of 50% with a CSAT cycle length of 80+80=160ms, with ON phase of 80ms and LTE-U tx power of 9dBm.
 The WiFi configuration was 802.11a, channel 48 (5240MHz), Tx power of 15 dBm, SISO and Atheros ANI disabled.
+
+## Detectors:
+
+A simple energy-based detector is provided; see tools/ed_detector.py
