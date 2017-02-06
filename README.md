@@ -131,8 +131,10 @@ The WiFi configuration was 802.11a, channel 48 (5240MHz), Tx power of 15 dBm, SI
 
 A simple energy-based detector is provided:
 
-	tools/ed_detector.py
+	tools/run_ed_detector.py
+
+It is executed for different LTE-U TX power levels. The real (measured) and estimated eff. available airtime it shown.
 
 ## Contact:
 
-TBD.
+zubow@tkn.tu-berlin.de
